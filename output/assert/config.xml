@@ -1,0 +1,131 @@
+<root>
+	<item>
+		<clss>com.performance.exam::IntUintTester</clss>
+		<title> int VS uint </title>
+		<desc>int 性能和 uint 性能比较:
+func:Function = function( a:Object )
+{
+	a = a + 1;
+	a = a - 1;
+	a = a * 2;
+	a = a / 2;
+};
+1.	while(){};
+2.	var a:int = 0; 
+	while(){ func(a) };
+3.	var a:uint = 0;
+	while(){ func(a) };
+执行设置次数</desc>
+		<min>1000000</min>
+		<max>30000000</max>
+		<dft>3000000</dft>
+	</item>
+	<item>
+		<clss>com.performance.exam::CircultateTester</clss>
+		<title> for VS for_each </title>
+		<desc>各种循环的性能比较, 循环内容:
+1. for( a in b ) {}
+2. for each( a in b ) {}
+3. for( a in b ){ c = b[a]; }
+4. for each( a in b ){ c = b; }
+		</desc>
+		<min>100000</min>
+		<max>300000</max>
+		<dft>100000</dft>
+	</item>
+	<item>
+		<clss>com.performance.exam::ArrayContructorTester</clss>
+		<title> [] VS new Array </title>
+		<desc> [] 和 new Array  性能比较, 循环内容:
+1.	while(){}
+2.	while(){ a = []; }
+3.	while(){ a = new Array(); }
+		 </desc>
+		<min>1000000</min>
+		<max>30000000</max>
+		<dft>3000000</dft>
+	</item>
+	<item>
+		<clss>com.performance.exam::DictionaryWeakTester</clss>
+		<title> Dictionary weak VS not  </title>
+		<desc>Dictionary 使用弱引用 和 强引用 性能比较,循环内容:
+1.	while(){}
+2.	dic = new Dictionary( true );
+	while(){ dic[i] = i; i = dic[i]; }
+3.	dic = new Dictionary( false );
+	while(){ dic[i] = i; i = dic[i]; }
+	 </desc>
+		<min>1000000</min>
+		<max>30000000</max>
+		<dft>1000000</dft>
+	</item>
+	
+	
+	<item>
+		<clss>com.performance.exam::LogerTraceTester</clss>
+		<title> as3Logger VS trace  </title>
+		<desc> org.as3commons.logging 与 AS3默认输出函数trace() 性能比较, 循环内容:
+1.	while(){} 
+2.	while(){ trace(''); }
+3.	while(){ getLogger( 'LogerTraceTester' ).info( '测试' ); }
+		</desc>
+		<min>1000</min>
+		<max>30000</max>
+		<dft>1000</dft>
+	</item>
+	
+
+	<item>
+		<clss>com.performance.exam::ObjectContructorTester</clss>
+		<title>'new Object()' VS '{}'</title>
+		<desc> Object 的构造方法有两种实现: new Object() 和 {}, 循环内容:
+1.	while() {}; 
+2.	while() { obj = new Object(); }
+3.	while() { obj = {}; }
+4.	while() { 
+		obj = new Object; 
+		obj[ 'name1' ] = 1; 
+	}
+5.	while() { obj = {name1:1}; };
+6.	while() { 
+		obj = new Object; 
+		obj[ 'name1' ] = 1; 
+		obj[ 'name2' ] = 2;
+	}
+7.	while() { obj = {name1:1,name2:2};}
+		</desc>
+		<min>1000000</min>
+		<max>30000000</max>
+		<dft>3000000</dft>
+	</item>
+	
+	<item>
+		<clss>com.performance.exam::StringJionTest</clss>
+		<title>a+b VS [a,b].join()</title>
+		<desc> 连接字符串有两种方法 str1+str2 和 [str1, str2].join(). 循环内容:
+1.	while(){ str = 'abc'; }
+2.	while(){ str = 'a' + 'b' + 'c'; }
+3.	while(){ str = ['a','b','c'].join(); }
+4.	arr = ['a','b','c'];	
+	while(){ str = arr.join(); };
+		</desc>
+		<min>100000</min>
+		<max>30000000</max>
+		<dft>300000</dft>
+	</item>
+	
+	
+	<item>
+		<clss>com.performance.exam::AbsTester</clss>
+		<title>Math.abs VS a>0?a:-a</title>
+		<desc> Math.abs() 或者 自己写. 循环内容:
+1.	while(){ num = init; }
+2.	while(){ num = Math.abs( init ); }
+3.	while(){ num = init > 0 ? init : -init; }
+		</desc>
+		<min>1000000</min>
+		<max>30000000</max>
+		<dft>3000000</dft>
+	</item>
+</root>
+

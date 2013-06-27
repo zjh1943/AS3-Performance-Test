@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   xmlns:frame="frame.*"
+			   minWidth="600" minHeight="400"
+			   creationComplete="application1_creationCompleteHandler(event)"
+			   addedToStage="application1_addedToStageHandler(event)"
+			   currentState="StateWaiting"
+			   >
+	<fx:Script>
+		<![CDATA[
+			import frame.AppFacade;
+			
+			import mx.core.Application;
+			import mx.events.FlexEvent;
+			
+			import spark.events.IndexChangeEvent;
+			
+			protected function application1_creationCompleteHandler(event:FlexEvent):void
+			{
+				currentState = 'StateNoConfig';
+				
+				
+				var url:String = mx.core.Application.application.parameters[ 'configUrl' ] as String;
+				AppFacade.getInstance().startup( this, url );
+			}
+			
+			
+			protected function application1_addedToStageHandler(event:Event):void
+			{
+				stage.addEventListener( Event.RESIZE, onStageRezie );
+			}
+			
+			protected function onStageRezie( e:Event ):void
+			{
+				this.width = stage.stageWidth;
+				this.height = stage.stageHeight;
+			}
+		]]>
+	</fx:Script>
+	<s:states>
+		<s:State name="StateWaiting"/>
+		<s:State name="StateNoConfig"/>
+		<s:State name="StateRunning"/>
+	</s:states>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+	</fx:Declarations>
+	<mx:ApplicationControlBar width="100%">
+		
+	</mx:ApplicationControlBar>
+	<s:Panel includeIn="StateRunning,StateWaiting" left="12" width="300" title="选择"
+			 enabled.StateRunning="false"
+			 top="48" bottom="12" enabled="true">
+		<s:Label y="10" left="10" width="90" height="20" paddingBottom="0" paddingTop="5"
+				 text="选择测试内容："/>
+		<s:DropDownList id="testChooseDl" y="10" right="10" left="127" height="20" labelField="title"
+						></s:DropDownList>
+		<s:Label y="38" left="10" width="90" height="23" fontSize="12" paddingBottom="0"
+				 paddingTop="8" text="循环次数："/>
+		<s:NumericStepper id="runCountNs" left="127" right="10" y="38" width="111" 
+						  />
+		<s:TextArea fontFamily="Consolas" id="descTa" left="10" right="10" top="90" bottom="44" borderColor="#13924F"
+					borderVisible="true"
+					/>
+		<s:Label y="71" left="10" width="90" height="22" text="测试内容描述：&#xd;"/>
+		<s:Button id="startBt" width="100" label="开始"
+				  bottom="12" horizontalCenter="0"/>
+		<s:Label includeIn="StateRunning" horizontalCenter="0" text="测试运行中无法更改配置" verticalCenter="2"/>
+	</s:Panel>
+	<s:Panel includeIn="StateRunning,StateWaiting" left="320" title="输出"
+			 top="48" bottom="12" right="12" >
+		<mx:TextArea id="outputTa" left="10" right="10" top="10" bottom="10" borderColor="#13924F" fontFamily="SimSun"/>
+		<s:Label id="runingLb" includeIn="StateRunning" width="114" height="12" horizontalCenter="9"
+				 text="测试运行中．．．" verticalCenter="0"/>
+		<s:Label id="copyTextLb" includeIn="StateWaiting" right="60" y="-21" text="复制文本" textDecoration="underline" buttonMode="true"/>
+		<s:Label id="copyHtmlLb" includeIn="StateWaiting" right="10" y="-21" text="复制html" textDecoration="underline" buttonMode="true"/>
+	</s:Panel>
+	<s:Label includeIn="StateNoConfig" horizontalCenter="0" text="请导入配置文件" verticalCenter="0"/>
+</s:Application>

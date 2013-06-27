@@ -1,0 +1,78 @@
+<root>
+	<item>
+		<clss>com.performance.exam::IntUintTester</clss>
+		<title> int VS uint </title>
+		<desc>int 性能和 uint 性能比较:
+a = a + 1;
+a = a - 1;
+a = a * 2;
+a = a / 2;
+执行设置次数</desc>
+		<min>1000000</min>
+		<max>30000000</max>
+		<dft>3000000</dft>
+	</item>
+	<item>
+		<clss>com.performance.exam::CircultateTester</clss>
+		<title> for VS for_each </title>
+		<desc>各种循环的性能比较, 循环内容:
+-for( a in b ) 空;
+-for each( a in b ) 空;
+-for( a in b ) c = b[a];
+-for each( a in b ) c = b;
+		</desc>
+		<min>100000</min>
+		<max>300000</max>
+		<dft>100000</dft>
+	</item>
+	<item>
+		<clss>com.performance.exam::ArrayContructorTester</clss>
+		<title> [] VS new Array </title>
+		<desc> [] 和 new Array  性能比较, 循环内容:
+-for() 空;
+-for() a = [];
+-for() a = new Array();
+		 </desc>
+		<min>1000000</min>
+		<max>30000000</max>
+		<dft>3000000</dft>
+	</item>
+	<item>
+		<clss>com.performance.exam::DictionaryWeakTester</clss>
+		<title> Dictionary weak VS not  </title>
+		<desc>Dictionary 使用弱引用 和 强引用 性能比较,循环内容:
+-for() 空;
+-for() dic[i] = i; i = dic[i];( weak )
+-for() dic[i] = i; i = dic[i];( not weak ) </desc>
+		<min>1000000</min>
+		<max>30000000</max>
+		<dft>1000000</dft>
+	</item>
+	
+	
+	<item>
+		<clss>com.performance.exam::LogerTraceTester</clss>
+		<title> as3Logger VS trace  </title>
+		<desc> org.as3commons.logging 与 AS3默认输出函数trace() 性能比较, 循环内容:
+-for() 空;
+-for() trace('');
+-for() getLogger( 'LogerTraceTester' ).info( '测试' );</desc>
+		<min>1000</min>
+		<max>30000</max>
+		<dft>1000</dft>
+	</item>
+	
+
+	<item>
+		<clss>com.performance.exam::ObjectContructorTester</clss>
+		<title>'new Object()' VS '{}'</title>
+		<desc> Object 的构造方法有两种实现: new Object() 和 {}, 循环内容:
+-for() 空;
+-for() obj = new Object();
+-for() obj = {};</desc>
+		<min>1000000</min>
+		<max>30000000</max>
+		<dft>3000000</dft>
+	</item>
+</root>
+
